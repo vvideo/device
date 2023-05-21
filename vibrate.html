@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Vibration API example</title>
+</head>
+<body>
+    <h1>Vibration API example</h1>
+    <p>
+        <input id="vibrate-data" size="20" type="text" value="100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100" />
+        <input id="vibrate-button" type="button" value="Vibrate" />
+    </p>
+    <pre id="result"></pre>
+<script>
+document.querySelector('#vibrate-button').addEventListener('click', function() {
+    var data = document.querySelector('#vibrate-data').value
+        .replace(/\s/g, '')
+        .split(',')
+        .map(function(item) {
+            return parseInt(item, 10);
+        });
+
+    var result = navigator.vibrate(data);
+    console.log(result);
+    document.querySelector('#result').innerText = 'Output:\nnavigator.vibrate([' + data.join(',') + ']);\n' + result;
+});
+</script>
+</body>
+</html>
